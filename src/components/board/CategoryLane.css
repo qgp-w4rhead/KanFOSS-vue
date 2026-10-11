@@ -1,0 +1,230 @@
+.lane {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 12px;
+  break-inside: avoid;
+  background: var(--surface-lane);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--cat, var(--line));
+  border-radius: var(--radius);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.lane input,
+.lane textarea {
+  cursor: text;
+  user-select: text;
+}
+
+.lane.is-source {
+  opacity: 0.4;
+}
+
+.lane.drop-before:nth-child(1 of .lane)::before,
+.lane.is-sub.drop-before::before,
+.lane.drop-after::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-radius: 2px;
+  background: color-mix(in oklch, var(--signal-line) 25%, transparent);
+  pointer-events: none;
+}
+
+.lane.drop-before:nth-child(1 of .lane)::before {
+  top: -16px;
+  height: 16px;
+}
+
+.lane.drop-after::after {
+  bottom: -16px;
+  height: 16px;
+}
+
+.lane.is-sub.drop-before::before {
+  top: -18px;
+  height: 18px;
+}
+
+.lane.is-sub.drop-after::after {
+  bottom: -18px;
+  height: 18px;
+}
+
+.lane.drop-center {
+  outline: 2px dashed var(--signal-line);
+  outline-offset: 2px;
+}
+
+.lane.is-sub {
+  width: auto;
+  margin: 8px 0 0 12px;
+  padding: 0 0 0 10px;
+  gap: 8px;
+  background: transparent;
+  border: 0;
+  border-left: 2px solid var(--cat, var(--line));
+  border-radius: 0;
+}
+
+.lane-head {
+  border-radius: var(--radius);
+}
+
+.lane-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lane-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.is-sub .lane-title {
+  font-size: 0.9rem;
+}
+
+.title-button {
+  width: 100%;
+  padding: 2px 4px;
+  text-align: left;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.title-input {
+  width: 100%;
+  padding: 4px 6px;
+  font-weight: 600;
+}
+
+.grip {
+  cursor: grab;
+  touch-action: none;
+  padding: 0 2px;
+  color: var(--text-muted);
+}
+
+.color-dot {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 2px solid var(--cat, var(--line));
+  border-radius: 50%;
+  background: var(--cat, transparent);
+}
+
+.color-dot.is-none {
+  background: transparent;
+  border-style: dashed;
+}
+
+.color-dot:hover:not(:disabled) {
+  background: var(--cat, transparent);
+}
+
+.color-dot.is-none:hover:not(:disabled) {
+  background: var(--hover);
+}
+
+.count {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.lane-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 40px;
+  padding: 2px;
+  border-radius: var(--radius);
+}
+
+.lane-body.is-target {
+  outline: 2px dashed var(--signal-line);
+  outline-offset: 2px;
+}
+
+.empty {
+  margin: 4px 2px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.add-card {
+  align-self: flex-start;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  color: var(--text-muted);
+  border-radius: 2px;
+}
+
+.add-card svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.add-card:hover:not(:disabled) {
+  color: var(--text);
+}
+
+.lane.is-drop-rejected {
+  cursor: not-allowed;
+}
+
+.lane.is-drop-rejected :deep(*) {
+  cursor: not-allowed;
+}
+
+.drop-rejection {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--cat-red);
+  border-radius: inherit;
+  color: var(--cat-red);
+  background: transparent;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.drop-rejection-x {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+.drop-rejection-label {
+  position: relative;
+  max-width: calc(100% - 24px);
+  padding: 4px 10px;
+  border: 1px solid var(--cat-red);
+  border-radius: var(--radius);
+  background: var(--surface-lane);
+  color: var(--cat-red);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  pointer-events: none;
+}
